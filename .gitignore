@@ -1,0 +1,20 @@
+# Git ignore file.
+
+# ======================== #
+# Output Folders and Files #
+# ======================== #
+bin
+obj
+
+# ================================ #
+# Operating System Generated Files #
+# ================================ #
+[Tt]humbs.db
+ehthumps.db
+$RECYCLE.BIN/
+Desktop.ini
+.DS_Store
+._*
+.Spotlight*
+.Trashes
+Icon?
