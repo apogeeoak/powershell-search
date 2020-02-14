@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet build",
+            "type": "shell",
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "silent", "clear": true },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet publish -c Release",
+            "type": "shell",
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

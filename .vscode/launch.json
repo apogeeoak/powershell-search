@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PowerShell Launch",
+            "type": "PowerShell",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "script": "${workspaceFolder}\\.vscode\\Launch.ps1",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
