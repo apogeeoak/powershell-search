@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<Settings>
+  <ExcludeLevel>Standard</ExcludeLevel>
+  <!-- <Exact> Requires an exact match. </Exact> -->
+  <!-- <Partial> Allows a partial match beginning with path. </Partial> -->
+  <Minimal>
+    <Exact>
+      <Directories>
+        <string>C:\$Recycle.Bin</string>
+        <string>C:\Documents and Settings</string>
+        <string>C:\Program Files\WindowsApps</string>
+        <string>C:\ProgramData\Application Data</string>
+        <string>C:\ProgramData\Desktop</string>
+        <string>C:\ProgramData\Documents</string>
+        <string>C:\ProgramData\Microsoft</string>
+        <string>C:\ProgramData\Packages</string>
+        <string>C:\ProgramData\Start Menu</string>
+        <string>C:\ProgramData\Templates</string>
+        <string>C:\ProgramData\USOPrivate</string>
+        <string>C:\ProgramData\WindowsHolographicDevices</string>
+        <string>C:\Recovery\Logs</string>
+        <string>C:\System Volume Information</string>
+        <string>C:\Users\All Users</string>
+        <string>C:\Windows\Logs</string>
+        <string>C:\Windows\System32\LogFiles</string>
+        <string>C:\Windows\System32\winevt\Logs</string>
+      </Directories>
+    </Exact>
+  </Minimal>
+
+  <Standard>
+    <Exact>
+      <Directories>
+        <string>%LocalAppData%\Google\Chrome\User Data</string>
+        <string>%LocalAppData%\Mozilla\Firefox\Profiles</string>
+        <string>%LocalAppData%\Microsoft</string>
+        <string>%LocalAppData%\Spotify</string>
+        <string>%AppData%\Code</string>
+        <string>%AppData%\Mozilla\Firefox\Profiles</string>
+      </Directories>
+    </Exact>
+    <Partial>
+      <Directories>
+        <string>%LocalAppData%\Packages\Microsoft.Windows</string>
+        <string>%LocalAppData%\Packages\PandoraMediaInc</string>
+      </Directories>
+    </Partial>
+  </Standard>
+
+  <Additional>
+    <Exact>
+      <Directories>
+        <string>C:\Users\Default</string>
+        <string>C:\Windows</string>
+      </Directories>
+    </Exact>
+    <Partial>
+      <Files>
+        <string>%LocalAppData%\Temp\smtcAlbumArt</string>
+      </Files>
+    </Partial>
+  </Additional>
+</Settings>

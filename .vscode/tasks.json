@@ -11,7 +11,7 @@
         },
         {
             "label": "publish",
-            "command": "dotnet publish -c Release",
+            "command": "dotnet publish -c Release -o Builds",
             "type": "shell",
             "problemMatcher": "$msCompile"
         }

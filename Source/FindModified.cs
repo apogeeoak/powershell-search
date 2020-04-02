@@ -4,6 +4,8 @@ namespace Apogee.Search.Commands
     using System.Collections.Generic;
     using System.IO;
     using System.Management.Automation;
+    using Apogee.Search.Controller;
+    using Apogee.Search.Model;
 
     /// <summary> Find modified file system items. </summary>
     [Cmdlet(VerbsCommon.Find, "Modified")]
@@ -11,7 +13,6 @@ namespace Apogee.Search.Commands
     public class FindModified : PSCmdlet
     {
         private List<string> paths = new List<string>();
-        private Settings settings = new Settings();
 
         /// <summary> Path to search. </summary>
         [Parameter(Position = 0, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
@@ -30,9 +31,9 @@ namespace Apogee.Search.Commands
         [Parameter]
         public DateTime After { get; set; }
 
-        /// <summary> Exclusion level for files and folders. Uses the value set in the settings file if not provided. If neither are set defaults to [ExcludeLevel]::None which excludes nothing. </summary>
+        /// <summary> Exclusion level for files and folders. Uses the value set in the settings file if not provided. If neither are set defaults to 'None' which excludes nothing. </summary>
         [Parameter]
-        public ExcludeLevel? ExcludeLevel { get; set; }
+        public ExcludeLevel? Exclude { get; set; }
 
         /// <summary> Display progress switch. Defaults to false which does not display incremental progress. </summary>
         [Parameter]
@@ -52,7 +53,8 @@ namespace Apogee.Search.Commands
         protected override void EndProcessing()
         {
             var progressRecord = (DisplayProgress) ? new ProgressRecord(0, "Find-Modified", "Searching...") : null;
-            settings.Read(ExcludeLevel);
+            var parameters = new CommandParameters(Exclude);
+            var settings = SettingsController.Create(parameters);
 
             foreach (var path in paths)
                 foreach (var item in GetModified(path, Recurse, Depth, After, settings, progressRecord))
@@ -61,7 +63,7 @@ namespace Apogee.Search.Commands
             base.EndProcessing();
         }
 
-        private IEnumerable<string> GetModified(string path, bool recurse, uint depth, DateTime after, Settings settings, ProgressRecord? progressRecord)
+        private IEnumerable<string> GetModified(string path, bool recurse, uint depth, DateTime after, SettingsController settings, ProgressRecord? progressRecord)
         {
             var discovered = new Stack<(string path, uint depth)>();
             discovered.Push((path, depth));
@@ -89,7 +91,7 @@ namespace Apogee.Search.Commands
                 // Add directories to discovered.
                 if (recurse && depth > 0)
                     for (int i = directories.Length - 1; i >= 0; --i)
-                        if (!settings.ExcludeFolder(directories[i]))
+                        if (!settings.ExcludeDirectory(directories[i]))
                             discovered.Push((directories[i], depth - 1));
             }
         }

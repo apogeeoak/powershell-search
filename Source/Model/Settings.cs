@@ -1,19 +1,26 @@
 namespace Apogee.Search.Model
 {
+    using System;
+    using System.Xml.Serialization;
+
+    [XmlRoot(ElementName = "Settings")]
     public class Settings
     {
-        public ExcludeLevel ExcludeLevel = ExcludeLevel.None;
-        public Excluded ExcludedFolders = new Excluded();
-        public Excluded ExcludedFiles = new Excluded();
+        public ExcludeLevel ExcludeLevel { get; set; } = ExcludeLevel.None;
+        public Group Minimal { get; set; } = new Group();
+        public Group Standard { get; set; } = new Group();
+        public Group Additional { get; set; } = new Group();
+    }
 
-        public bool ExcludeFolder(string item) => ExcludedFolders.Exclude(item);
-        public bool ExcludeFile(string item) => ExcludedFiles.Exclude(item);
+    public class Group
+    {
+        public Paths Exact { get; set; } = new Paths();
+        public Paths Partial { get; set; } = new Paths();
+    }
 
-        public void PostProcess(ExcludeLevel? parameterLevel)
-        {
-            var level = parameterLevel ?? ExcludeLevel;
-            ExcludedFolders.PostProcess(level);
-            ExcludedFiles.PostProcess(level);
-        }
+    public class Paths
+    {
+        public string[] Directories { get; set; } = Array.Empty<string>();
+        public string[] Files { get; set; } = Array.Empty<string>();
     }
 }

@@ -14,7 +14,7 @@
 .Parameter After
     The datetime after which to search for modified items. Default value: (30 minutes).
 .Parameter ExcludeLevel
-    The excludion level for items. Default value: (None).
+    The exclusion level for items. Default value: (None).
 .Parameter DisplayProgress
     Switch to determine if incremental progress is displayed. Default value: (False).
 .Example
@@ -29,7 +29,7 @@ function Find-RecentlyModified (
     [switch] $Recurse,
     [uint] $Depth,
     [datetime] $After = (Get-Date).AddMinutes(-30),
-    [Nullable[Apogee.Search.ExcludeLevel]] $ExcludeLevel,
+    [Nullable[Apogee.Search.Model.ExcludeLevel]] $ExcludeLevel,
     [switch] $DisplayProgress)
 {
     $parameters = @{
@@ -51,7 +51,7 @@ function Find-RecentlyModified (
 .Description
     Writes files and folders modified after a given time to a file. Uses a recursive search.
 .Parameter Path
-    The paths to begin the search from. Default value: ('C:\').
+    The paths to begin the search from. Default value: ('Root directory: /').
 .Parameter NoRecurse
     Search only the given items. By default child items are also searched. Default value: (False).
 .Parameter Depth
@@ -59,23 +59,23 @@ function Find-RecentlyModified (
 .Parameter After
     The datetime after which to search for modified items. Default value: (30 minutes).
 .Parameter ExcludeLevel
-    The excludion level for items. Default value: (None).
+    The exclusion level for items. Default value: (None).
 .Parameter NoProgress
     Do not display incremental progress. Default value: (False).
 .Parameter File
     The file to write the search results to. Default value: ('found.txt').
 .Example
     Write-RecentlyModifiedToFile
-    Writes the files and folders within the 'C:\' drive modified within the default time frame to the default file.
+    Writes the files and folders within the root '/' directory modified within the default time frame to the default file.
 .Outputs
     None
 #>
 function Write-RecentlyModifiedToFile (
-    [string[]] $Path = 'C:\',
+    [string[]] $Path = '/',
     [switch] $NoRecurse,
     [uint] $Depth,
     [datetime] $After = (Get-Date).AddMinutes(-30),
-    [Nullable[Apogee.Search.ExcludeLevel]] $ExcludeLevel,
+    [Nullable[Apogee.Search.Model.ExcludeLevel]] $ExcludeLevel,
     [switch] $NoProgress,
     [string] $File = 'found.txt',
     [string] $ErrorFile = 'error.txt')

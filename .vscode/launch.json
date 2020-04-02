@@ -2,12 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "PowerShell Launch",
-            "type": "PowerShell",
+            "name": "Dotnet Core Launch",
+            "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "script": "${workspaceFolder}\\.vscode\\Launch.ps1",
-            "cwd": "${workspaceFolder}"
+            "program": "pwsh",
+            "args": [ "-Command", "${workspaceFolder}\\Launch.ps1" ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
         }
     ]
 }
